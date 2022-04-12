@@ -1,0 +1,20 @@
+<launch>
+    <!-- 来源是相机还是视频 -->
+    <!-- <arg name="is_video" default="true"/> -->
+    <!-- <arg name="video_path" default="/home/wxy/catkin_yolov5/src/default_cam/data/yolov5test.mp4"/> -->
+    <arg name="image_source" default="camera"/>
+    <arg name="video_path" default="/home/free/catkin_objdetect/test.mp4"/>
+    <arg name="cam_device" default="0"/>
+
+
+    <node pkg="yolox_ros" type="default_cam" name="video_source" output="screen" >
+        <!-- <remap from="/default_cam" to="/default_cam/video"/> -->
+        <!-- <param name="is_video" type="bool" value="$(arg is_video)"/>
+        <param name="video_path" type="str" value="$(arg video_path)"/> -->
+
+        <param name="image_source" type="str" value="$(arg image_source)" />
+        <param name="video_path" type="str" value="$(arg video_path)" />
+        <param name="cam_device" type="str" value="$(arg cam_device)" />
+    </node>
+
+</launch>

@@ -1,0 +1,21 @@
+<launch>
+
+    <arg name="detector_type" default="yolox_ros_openvino"/>
+    <!-- <arg name="image_source" default="camera"/> -->
+    <!-- <arg name="video_path" default="/home/free/catkin_objdetect/test.mp4"/> -->
+    <arg name="model_path" default="/home/free/catkin_objdetect/src/yolox_ros/script/YOLOX/weights/openvino_weights/yolox_s.xml"/>
+    <!-- <arg name="cam_device" default=0/> -->
+    <arg name="infer_device" default="CPU"/>
+
+    
+    <node pkg="yolox_ros" type="$(arg detector_type)" name="yolox_ros_node" output="screen">
+        <remap from="/img_source" to="/default_image_source"/>
+        <!-- <param name="image_source" type="str" value="$(arg image_source)" /> -->
+        <!-- <param name="video_path" type="str" value="$(arg video_path)" /> -->
+        <!-- <param name="cam_device" type="str" value="$(arg cam_device)" /> -->
+        <param name="model_path" type="str" value="$(arg model_path)" />
+        <param name="infer_device" type="str" value="$(arg infer_device)" />
+    </node>
+
+
+</launch>
