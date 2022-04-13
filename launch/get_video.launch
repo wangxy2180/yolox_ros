@@ -2,8 +2,8 @@
     <!-- 来源是相机还是视频 -->
     <!-- <arg name="is_video" default="true"/> -->
     <!-- <arg name="video_path" default="/home/wxy/catkin_yolov5/src/default_cam/data/yolov5test.mp4"/> -->
-    <arg name="image_source" default="camera"/>
-    <arg name="video_path" default="/home/free/catkin_objdetect/test.mp4"/>
+    <arg name="image_source" default="video"/> <!--camera or video-->
+    <arg name="video_path" default="/home/free/catkin_objdetect/src/yolox_ros/test_video.mp4"/>
     <arg name="cam_device" default="0"/>
 
 

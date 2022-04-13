@@ -22,7 +22,7 @@ YOLOXVINODetector::YOLOXVINODetector(/* args */) : nh_("~")
     get_ros_param();
     // image_transport::ImageTransport it(nh_);
     // image_transport::Subscriber it_sub = it.subscribe("/imga",1,&YOLOXVINODetector::detect_callback,this);
-    image_sub_ = nh_.subscribe("/img_source", 1, &YOLOXVINODetector::detect_callback, this);
+    image_sub_ = nh_.subscribe("/img_source", 100, &YOLOXVINODetector::detect_callback, this);
     cout << model_path_ << endl;
     std::cout << "ctor" << std::endl;
 
@@ -133,6 +133,8 @@ void YOLOXVINODetector::detect_callback(const sensor_msgs::Image::ConstPtr &msg)
         // --------------------------- Step 7. Do inference
         // --------------------------------------------------------
         /* Running the request synchronously */
+        // timer.tic();
+
         infer_request.Infer();
         // -----------------------------------------------------------------------------------------------------
 
@@ -156,7 +158,7 @@ void YOLOXVINODetector::detect_callback(const sensor_msgs::Image::ConstPtr &msg)
         std::vector<Object> objects;
 
         decode_outputs(net_pred, objects, scale, img_w, img_h);
-        draw_objects(image, objects);
+        // draw_objects(image, objects);
 
         // -----------------------------------------------------------------------------------------------------
     }
@@ -165,7 +167,7 @@ void YOLOXVINODetector::detect_callback(const sensor_msgs::Image::ConstPtr &msg)
         std::cerr << ex.what() << std::endl;
         return;
     }
-    ROS_INFO("time:%f",(timer.toc())/1000000000.0);
+    ROS_INFO("fps:%f", 1.0/((timer.toc()) / 1000000000.0));
     return;
 }
 
@@ -467,8 +469,8 @@ void YOLOXVINODetector::draw_objects(const cv::Mat &bgr, const std::vector<Objec
 
     cv::imwrite("_demo.jpg", image);
     fprintf(stderr, "save vis file\n");
-    /* cv::imshow("image", image); */
-    /* cv::waitKey(0); */
+    // cv::imshow("image", image);
+    // cv::waitKey(30);
 }
 
 int main(int argc, char *argv[])

@@ -7,7 +7,7 @@
     <!-- <arg name="cam_device" default=0/> -->
     <arg name="infer_device" default="CPU"/>
 
-    
+    <include file="$(find yolox_ros)/launch/get_video.launch"/>
     <node pkg="yolox_ros" type="$(arg detector_type)" name="yolox_ros_node" output="screen">
         <remap from="/img_source" to="/default_image_source"/>
         <!-- <param name="image_source" type="str" value="$(arg image_source)" /> -->

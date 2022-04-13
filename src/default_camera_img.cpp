@@ -3,6 +3,7 @@
 #include <opencv2/opencv.hpp>
 #include <image_transport/image_transport.h>
 #include <cv_bridge/cv_bridge.h>
+#include <unistd.h>
 
 using namespace std;
 using namespace ros;
@@ -29,6 +30,7 @@ int main(int argc, char **argv)
 		nh.param<std::string>("video_path", video_path, "video_path");
 		// nh.getParam("video_path", video_path);
 		// 是不是可以直接assert啊
+		sleep(40);
 		if (!capture.open(video_path))
 		{
 			ROS_ERROR("Failed to open video.");
@@ -83,7 +85,7 @@ int main(int argc, char **argv)
 			// cout<<cur_path<<endl;
 		}
 		// ROS_INFO("wohaihuozhe . . .");
-		ROS_INFO("alive . . .");
+		// ROS_INFO("alive . . .");
 		ros::spinOnce();
 	}
 }
