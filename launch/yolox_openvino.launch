@@ -5,7 +5,7 @@
     <!-- <arg name="video_path" default="/home/free/catkin_objdetect/test.mp4"/> -->
     <arg name="model_path" default="/home/free/catkin_objdetect/src/yolox_ros/script/YOLOX/weights/openvino_weights/yolox_s.xml"/>
     <!-- <arg name="cam_device" default=0/> -->
-    <arg name="infer_device" default="CPU"/>
+    <arg name="infer_device" default="GPU"/>
 
     <include file="$(find yolox_ros)/launch/get_video.launch"/>
     <node pkg="yolox_ros" type="$(arg detector_type)" name="yolox_ros_node" output="screen">

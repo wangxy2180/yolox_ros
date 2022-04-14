@@ -17,7 +17,7 @@ static const int INPUT_W = 416;
 static const int INPUT_H = 416;
 static const int NUM_CLASSES = 80; // COCO has 80 classes. Modify this value on your own dataset.
 
-YOLOXVINODetector::YOLOXVINODetector(/* args */) : nh_("~")
+YOLOXVINODetector::YOLOXVINODetector(/* args */) : nh_("~"),loop_cnt(0),fps_cnt(0)
 {
     get_ros_param();
     // image_transport::ImageTransport it(nh_);
@@ -167,7 +167,11 @@ void YOLOXVINODetector::detect_callback(const sensor_msgs::Image::ConstPtr &msg)
         std::cerr << ex.what() << std::endl;
         return;
     }
-    ROS_INFO("fps:%f", 1.0/((timer.toc()) / 1000000000.0));
+    double tmp_fps = 1.0/((timer.toc()) / 1000000000.0);
+    loop_cnt+=1;
+    fps_cnt+=tmp_fps;
+    ROS_INFO("fps:%f", tmp_fps);
+    ROS_INFO("avg fps:%f", fps_cnt/loop_cnt);
     return;
 }
 

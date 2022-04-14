@@ -38,6 +38,9 @@ private:
     std::string output_name;
     InferRequest infer_request;
 
+    int loop_cnt;
+    double fps_cnt;
+
     /* data */
 public:
     YOLOXVINODetector(/* args */);
